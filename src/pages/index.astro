@@ -1,8 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-// Fetch all markdown files inside the src/pages/posts/ directory
-const allPosts = await Astro.glob('./posts/*.md');
+// Fetch all posts from the pages directory
+const allPosts = await getCollection('pages', ({ id }) => {
+	return id.startsWith('posts/');
+});
 ---
 
 <Layout title="My Portfolio">
@@ -16,7 +19,9 @@ const allPosts = await Astro.glob('./posts/*.md');
 		<ul>
 			{allPosts.map((post) => (
 				<li>
-					<a href={post.url}>{post.frontmatter.title}</a>
+					<a href={`/${post.id.replace(/\.md$/, '')}`}>
+						{post.data.title || post.id}
+					</a>
 				</li>
 			))}
 		</ul>
