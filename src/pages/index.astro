@@ -2,10 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-// Fetch all posts from the pages directory
-const allPosts = await getCollection('pages', ({ id }) => {
-	return id.startsWith('posts/');
-});
+// Fetch all posts from the posts content collection
+const posts = await getCollection('posts');
 ---
 
 <Layout title="My Portfolio">
@@ -18,19 +16,18 @@ const allPosts = await getCollection('pages', ({ id }) => {
     <main>
         <h2>My Projects</h2>
         <section>
-            <div class="project-card">
-                <h3>vulnerable-app</h3>
-                <p>A playground made to demonstrate common security weaknesses implemented in modern application
-                    development, made in Python and C.</p>
-                <a href="https://github.com/beranekleon/vulnerable-app" target="_blank">View Code</a>
-            </div>
-            <br>
-            <div class="project-card">
-                <h3>Compete. Improve. Dominate.</h3>
-                <p>An augmented reality game allowing you to conquer territory around you like in Risk or Splatoon. Made
-                    Collaboratively in an agile team for a practise diploma project in JavaScript and React Native.</p>
-                <a href="https://github.com/beranekleon/competeimprovedominate" target="_blank">View Code</a>
-            </div>
+            {posts.map((post, index) => (
+                <>
+                    <div class="project-card">
+                        <h3>{post.data.title}</h3>
+                        {post.data.description && <p>{post.data.description}</p>}
+                        {post.data.github_url && (
+                            <a href={post.data.github_url} target="_blank">View Code</a>
+                        )}
+                    </div>
+                    {index < posts.length - 1 && <br />}
+                </>
+            ))}
         </section>
     </main>
 
