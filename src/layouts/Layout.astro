@@ -20,36 +20,7 @@ const { title } = Astro.props;
 </head>
 
 <body>
-
-    <header>
-        <h1>Hi, I'm Leon</h1>
-        <p>Welcome to my personal portfolio built completely from scratch.</p>
-        <p>(⚠️ This is very much WIP)</p>
-    </header>
-
-    <main>
-        <h2>My Projects</h2>
-        <section>
-            <div class="project-card">
-                <h3>vulnerable-app</h3>
-                <p>A playground made to demonstrate common security weaknesses implemented in modern application
-                    development, made in Python and C.</p>
-                <a href="https://github.com/beranekleon/vulnerable-app" target="_blank">View Code</a>
-            </div>
-            <br>
-            <div class="project-card">
-                <h3>Compete. Improve. Dominate.</h3>
-                <p>An augmented reality game allowing you to conquer territory around you like in Risk or Splatoon. Made
-                    Collaboratively in an agile team for a practise diploma project in JavaScript and React Native.</p>
-                <a href="https://github.com/beranekleon/competeimprovedominate" target="_blank">View Code</a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="fixed-footer">
-        <p>© 2026 My Portfolio. All rights reserved.</p>
-    </footer>
-
+    <slot />
 </body>
 
 </html>
